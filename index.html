@@ -32,6 +32,29 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
 
+        /* --- 애니메이션 정의 --- */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.3s; }
+        .delay-3 { animation-delay: 0.5s; }
+        .delay-4 { animation-delay: 0.7s; }
+
+        /* 기존 스타일 유지 */
         .section {
             margin-bottom: 30px;
             padding-top: 10px;
@@ -45,14 +68,14 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             margin-bottom: 15px;
-            text-align: center; /* middle 대신 center 사용 */
+            text-align: center;
         }
 
         .profile-img {
             width: 130px; 
             height: 130px;
             border-radius: 50%;
-            margin-bottom: -1px;
+            margin-bottom: 15px;
             border: 2px solid rgba(255, 255, 255, 0.3);
             object-fit: cover;
             box-shadow: 0 10px 20px rgba(255,255,255,0.1);
@@ -72,27 +95,27 @@
         }
 
         .link-button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(255, 255, 255, 1); /* 깨끗한 화이트 */
-    color: #000;
-    text-decoration: none;
-    margin-bottom: 12px;
-    padding: 14px;
-    border-radius: 15px;
-    font-weight: 700;
-    font-size: 0.95rem;
-    transition: all 0.25s ease;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 1);
+            color: #000;
+            text-decoration: none;
+            margin-bottom: 12px;
+            padding: 14px;
+            border-radius: 15px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
 
-.link-button:hover {
-    transform: scale(1.02);
-    background-color: #f0f0f0;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
-}
-        /* 소셜 아이콘 영역 */
+        .link-button:hover {
+            transform: scale(1.02);
+            background-color: #f0f0f0;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+
         .social-icons {
             display: flex;
             justify-content: center;
@@ -110,7 +133,6 @@
         .social-icon.insta:hover { color: #E1306C; transform: translateY(-5px); }
         .social-icon.youtube:hover { color: #FF0000; transform: translateY(-5px); }
 
-        /* 공모전 버튼들 */
         .round-button-group {
             display: flex;
             justify-content: center;
@@ -148,12 +170,13 @@
 <body>
 
     <div class="container">
-        <img src="pega_logo.png" alt="Profile" class="profile-img">
-        
-        <h1>PEGASUS</h1>
-        <p>광운대학교 중앙록밴드 동아리</p>
+        <div class="fade-in delay-1">
+            <img src="pega_logo.png" alt="Profile" class="profile-img">
+            <h1>PEGASUS</h1>
+            <p>광운대학교 중앙록밴드 동아리</p>
+        </div>
 
-        <div class="social-icons">
+        <div class="social-icons fade-in delay-2">
             <a href="https://instagram.com/@kw_pegasus" class="social-icon insta" target="_blank">
                 <i class="fab fa-instagram"></i>
             </a>
@@ -161,18 +184,21 @@
                 <i class="fab fa-youtube"></i>
             </a>
         </div>
-        <div class="section">
-    <div class="section-title">PEGASUS 둘러보기</div>
-    <a href="https://youtube.com/playlist?list=PL3uNA-XitI3EC-_8QyXrA2AotcgobJHR0&si=w6ZZ3iAiWZx0t6Gu" class="link-button" target="_blank">
-        <i class="fas fa-play-circle" style="margin-right: 8px;"></i> PEGASUS X 비마응원단
-    </a>
-    <a href="https://youtube.com/playlist?list=PL3uNA-XitI3HaT0UZ2O0zdm5SeMddVwyo&si=j1S4dYxqznPs6-85" class="link-button" target="_blank">
-        <i class="fas fa-play-circle" style="margin-right: 8px;"></i> 2025 정기연주회    </a>
-    <a href="https://youtube.com/playlist?list=PL3uNA-XitI3Ggf4ryx-Xrkd3zga9-nflC&si=2iEJ3pT9clBSEzUY" class="link-button" target="_blank">
-        <i class="fas fa-play-circle" style="margin-right: 8px;"></i> 2025 축제 AINES : 조각
-    </a>
-</div>
-        <div class="section">
+
+        <div class="section fade-in delay-3">
+            <div class="section-title">PEGASUS 둘러보기</div>
+            <a href="https://youtube.com/playlist?list=PL3uNA-XitI3EC-_8QyXrA2AotcgobJHR0&si=w6ZZ3iAiWZx0t6Gu" class="link-button" target="_blank">
+                <i class="fas fa-play-circle" style="margin-right: 8px;"></i> PEGASUS X 비마응원단
+            </a>
+            <a href="https://youtube.com/playlist?list=PL3uNA-XitI3HaT0UZ2O0zdm5SeMddVwyo&si=j1S4dYxqznPs6-85" class="link-button" target="_blank">
+                <i class="fas fa-play-circle" style="margin-right: 8px;"></i> 2025 정기연주회
+            </a>
+            <a href="https://youtube.com/playlist?list=PL3uNA-XitI3Ggf4ryx-Xrkd3zga9-nflC&si=2iEJ3pT9clBSEzUY" class="link-button" target="_blank">
+                <i class="fas fa-play-circle" style="margin-right: 8px;"></i> 2025 축제 AINES : 조각
+            </a>
+        </div>
+
+        <div class="section fade-in delay-4">
             <div class="section-title">2026 응원가 가사 공모전</div>
             <div class="round-button-group">
                 <a href="https://forms.gle/dMnNT9kub6ma5cLFA" target="_blank" class="round-button">
@@ -190,7 +216,7 @@
             </div>
         </div>
 
-        <div class="footer">© kw_PEGASUS</div>
+        <div class="footer fade-in delay-4">© kw_PEGASUS</div>
     </div>
 
 </body>
