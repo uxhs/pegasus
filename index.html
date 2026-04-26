@@ -56,7 +56,6 @@
         #aboutContainer { position: absolute; top: 0; transform: translateX(150%); opacity: 0; display: none; }
         .about-slide-in { display: block !important; opacity: 1 !important; transform: translateX(0) !important; position: relative !important; }
 
-        /* # 상단 돌아가기 아이콘 */
         .exit-btn {
             position: absolute;
             top: 25px;
@@ -80,31 +79,26 @@
         .link-button { display: flex; align-items: center; justify-content: center; background-color: #ffffff; color: #000; text-decoration: none; margin-bottom: 12px; padding: 14px; border-radius: 15px; font-weight: 700; font-size: 0.95rem; transition: 0.25s; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .link-button:hover { transform: scale(1.02); background-color: #f0f0f0; }
 
-        /* # 소셜 호버 컬러 복구 */
         .social-icons { display: flex; justify-content: center; gap: 30px; margin-bottom: 25px; }
         .social-icon { text-decoration: none; font-size: 2.2rem !important; color: rgba(255, 255, 255, 0.7); transition: all 0.3s ease; }
         .social-icon.insta:hover { color: #E1306C; transform: translateY(-5px); }
         .social-icon.youtube:hover { color: #FF0000; transform: translateY(-5px); }
 
-        /* # 공모전 버튼 및 아이콘 크기 복구 */
         .round-button-group { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
         .round-button { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 75px; height: 75px; background-color: #fff; color: #000; border-radius: 50%; text-decoration: none; font-size: 0.75rem; font-weight: 700; transition: all 0.25s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.2); border: none; cursor: pointer; }
         .round-button i { font-size: 1.5rem !important; margin-bottom: 4px; }
         .round-button:hover { background-color: #000; color: #fff; transform: translateY(-5px); }
 
-        /* --- About 페이지 --- */
-        .about-main-img { width: 100%; border-radius: 15px; margin-bottom: 10px; }
+        /* About 페이지 상세 */
+        .about-main-img { width: 100%; border-radius: 15px; margin-bottom: 20px; }
         .about-quote { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 20px 0; font-style: italic; word-break: keep-all; }
         .about-desc { font-size: 0.9rem; color: rgba(255, 255, 255, 0.8); line-height: 1.8; text-align: left; word-break: keep-all; padding: 0 5px; margin-bottom: 30px; }
 
-        /* --- 모달 팝업 --- */
+        /* 모달 및 푸터 */
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
         .modal-content { position: relative; background-color: rgba(26, 26, 26, 0.95); margin: 15% auto; padding: 25px; border: 1px solid rgba(255,255,255,0.2); width: 80%; max-width: 320px; border-radius: 25px; text-align: center; color: white; animation: fadeInUp 0.5s ease-out; }
         .close-btn { position: absolute; right: 15px; top: 10px; color: #fff; font-size: 32px; font-weight: 900; cursor: pointer; line-height: 1; }
-        
-        /* # 연락처 팝업 전화기 아이콘 크기 보강 */
         #contactModal i.fa-phone-alt { font-size: 2.5rem !important; margin-bottom: 15px; color: #fff; }
-
         .footer { margin-top: 30px; font-size: 0.8rem; color: rgba(255, 255, 255, 0.3); }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
@@ -114,12 +108,11 @@
     <div id="noticeModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('noticeModal')">&times;</span>
-            <img src="poster.jpg" alt="공모전 포스터" style="width:100%; border-radius:15px; margin-bottom:20px;">
+            <img src="poster.jpg" alt="공지 이미지" style="width:100%; border-radius:15px; margin-bottom:20px;">
             <div class="modal-text">
-                <h3>2026 응원가 가사 공모전</h3>
-                <p>여러분의 가사로 열정적인 응원 문화를 만들어보아요!</p>
-                <a href="https://forms.gle/dMnNT9kub6ma5cLFA" target="_blank" class="link-button" style="margin-bottom: 0;">참여하기</a>
-            </div>
+                <h3>새로운 소식</h3>
+                <p>준비 중인 소식이 곧 공개됩니다!</p>
+                </div>
         </div>
     </div>
 
@@ -159,14 +152,6 @@
             <a href="https://youtube.com/playlist?list=PL3uNA-XitI3Ggf4ryx-Xrkd3zga9-nflC" class="link-button" target="_blank"><i class="fas fa-play-circle" style="margin-right: 8px;"></i> 2025 축제 AINES : 조각</a>
         </div>
 
-        <div class="section">
-            <div class="section-title">2026 응원가 가사 공모전</div>
-            <div class="round-button-group">
-                <a href="https://forms.gle/dMnNT9kub6ma5cLFA" target="_blank" class="round-button"><i class="fas fa-file-pen"></i><span>구글 폼</span></a>
-                <a href="https://youtu.be/0nMBXKJzZZ8" target="_blank" class="round-button"><i class="fas fa-music"></i><span>음원</span></a>
-                <a href="https://drive.google.com/file/d/1t1iCHJh_GBgebAPaYnKpgxkWw2sVpgV6/view" target="_blank" class="round-button"><i class="fas fa-file-lines"></i><span>악보</span></a>
-            </div>
-        </div>
         <div class="footer">© kw_PEGASUS</div>
     </div>
 
@@ -198,8 +183,11 @@
         const noticeModal = document.getElementById("noticeModal");
         const contactModal = document.getElementById("contactModal");
 
+        // [팝업 자동 실행 비활성화]
+        // 나중에 다시 띄우고 싶다면 아래 setTimeout 부분을 주석 해제하세요.
         window.addEventListener('load', () => {
-            setTimeout(() => { noticeModal.style.display = "block"; }, 500);
+            /* setTimeout(() => { noticeModal.style.display = "block"; }, 500); 
+            */
         });
 
         function showAbout() {
@@ -214,7 +202,7 @@
             setTimeout(() => {
                 aboutContainer.style.display = "none";
                 mainContainer.classList.remove('main-slide-out');
-            }, 190); 
+            }, 600); 
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
