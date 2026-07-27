@@ -53,9 +53,11 @@
         }
 
         .main-slide-out { transform: translateX(-150%) !important; opacity: 0 !important; position: absolute !important; pointer-events: none; }
-        #aboutContainer { position: absolute; top: 0; transform: translateX(150%); opacity: 0; display: none; }
-        .about-slide-in { display: block !important; opacity: 1 !important; transform: translateX(0) !important; position: relative !important; }
+        
+        #aboutContainer, #ticketContainer { position: absolute; top: 0; transform: translateX(150%); opacity: 0; display: none; }
+        .about-slide-in, .ticket-slide-in { display: block !important; opacity: 1 !important; transform: translateX(0) !important; position: relative !important; }
 
+        /* 상단 돌아가기 아이콘 */
         .exit-btn {
             position: absolute;
             top: 25px;
@@ -79,10 +81,25 @@
         .link-button { display: flex; align-items: center; justify-content: center; background-color: #ffffff; color: #000; text-decoration: none; margin-bottom: 12px; padding: 14px; border-radius: 15px; font-weight: 700; font-size: 0.95rem; transition: 0.25s; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .link-button:hover { transform: scale(1.02); background-color: #f0f0f0; }
 
+        .ticket-highlight-btn {
+            background: linear-gradient(135deg, #ffffff 0%, #e0e0e0 100%);
+            color: #000;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+        }
+        .ticket-highlight-btn:hover {
+            transform: scale(1.03);
+            background: #ffffff;
+            box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
+        }
+
+        /* 소셜 & 티켓 아이콘 스타일 */
         .social-icons { display: flex; justify-content: center; gap: 30px; margin-bottom: 25px; }
-        .social-icon { text-decoration: none; font-size: 2.2rem !important; color: rgba(255, 255, 255, 0.7); transition: all 0.3s ease; }
+        .social-icon { text-decoration: none; font-size: 2.2rem !important; color: rgba(255, 255, 255, 0.7); transition: all 0.3s ease; cursor: pointer; }
         .social-icon.insta:hover { color: #E1306C; transform: translateY(-5px); }
         .social-icon.youtube:hover { color: #FF0000; transform: translateY(-5px); }
+        .social-icon.ticket:hover { color: #FFD700; transform: translateY(-5px); }
 
         .round-button-group { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
         .round-button { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 75px; height: 75px; background-color: #fff; color: #000; border-radius: 50%; text-decoration: none; font-size: 0.75rem; font-weight: 700; transition: all 0.25s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.2); border: none; cursor: pointer; }
@@ -90,7 +107,7 @@
         .round-button:hover { background-color: #000; color: #fff; transform: translateY(-5px); }
 
         /* About 페이지 상세 */
-        .about-main-img { width: 100%; border-radius: 15px; margin-bottom: 20px; }
+        .about-main-img { width: 100%; border-radius: 15px; margin-bottom: 10px; }
         .about-quote { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 20px 0; font-style: italic; word-break: keep-all; }
         .about-desc { font-size: 0.9rem; color: rgba(255, 255, 255, 0.8); line-height: 1.8; text-align: left; word-break: keep-all; padding: 0 5px; margin-bottom: 30px; }
 
@@ -110,7 +127,9 @@
             <span class="close-btn" onclick="closeModal('noticeModal')">&times;</span>
             <img src="poster.jpg" alt="공지 이미지" style="width:100%; border-radius:15px; margin-bottom:20px;">
             <div class="modal-text">
-                <a href="https://youtube.com/playlist?list=PL3uNA-XitI3FxURNVBT9iDbqm6Zh7p2J3" target="_blank" class="link-button" style="margin-bottom: 0;">보러가기</a>
+                <button class="link-button ticket-highlight-btn" onclick="showTicketFromNotice()" style="margin-bottom: 0; width: 100%;">
+                    <i class="fas fa-receipt" style="margin-right: 8px;"></i> PEGASUS 연합공연 예매하기
+                </button>
             </div>
         </div>
     </div>
@@ -134,14 +153,22 @@
         <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
     </div>
 
+    <!-- [메인 페이지] -->
     <div id="mainContainer" class="container">
         <img src="pega_logo.png" alt="Profile" class="profile-img" onclick="showAbout()">
         <h1>PEGASUS</h1>
         <p>광운대학교 중앙록밴드 동아리</p>
 
         <div class="social-icons">
-            <a href="https://instagram.com/kw_pegasus" class="social-icon insta" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://youtube.com/@kw_PEGASUS" class="social-icon youtube" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://instagram.com/kw_pegasus" class="social-icon insta" target="_blank" title="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://youtube.com/@kw_PEGASUS" class="social-icon youtube" target="_blank" title="YouTube">
+                <i class="fab fa-youtube"></i>
+            </a>
+            <span class="social-icon ticket" onclick="showTicketDirect()" title="연합공연 예매">
+                <i class="fas fa-receipt"></i>
+            </span>
         </div>
 
         <div class="section">
@@ -154,8 +181,9 @@
         <div class="footer">© kw_PEGASUS</div>
     </div>
 
+    <!-- [소개 페이지] -->
     <div id="aboutContainer" class="container">
-        <i class="fas fa-sign-out-alt exit-btn" onclick="showMain()" title="돌아가기"></i>
+        <i class="fas fa-sign-out-alt exit-btn" onclick="showMain('aboutContainer')" title="돌아가기"></i>
         <div class="section-title">About PEGASUS</div>
         <img src="about_main.jpg" alt="Pegasus Group" class="about-main-img">
         <div class="about-quote">"당신의 심장에 Rock Spirit을!"</div>
@@ -176,14 +204,34 @@
         <div class="footer">© kw_PEGASUS</div>
     </div>
 
+    <!-- [연합공연 예매 전용 페이지] -->
+    <div id="ticketContainer" class="container">
+        <i class="fas fa-sign-out-alt exit-btn" onclick="showMain('ticketContainer')" title="돌아가기"></i>
+        <div class="section-title">PEGASUS 티켓 예매</div>
+        
+        <p style="margin-top: 10px; margin-bottom: 25px; color: rgba(255,255,255,0.85); font-size: 0.95rem;">
+            원하시는 연합공연 예매 링크를 선택해 주세요.
+        </p>
+
+        <div class="section">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdcmV8omkoth-fs58mJ_yT7l9PbrWtPipHnLC2Y2bk1Ntej0A/viewform" target="_blank" class="link-button">
+                <i class="fas fa-receipt" style="margin-right: 8px;"></i> 08/02 &lt;爆&gt; 예매하기
+            </a>
+            <a href="https://dudoong.com/events/1652?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAcGRvZgJleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA85MzY2MTk3NDMzOTI0NTkAAaeOXMS6GfcP_01-7cPZjDEzCUM9VWxqePnB138Y1zY5-1SxkAADaXizO8wxzA_aem_bHuNb3HIbX1ot974w1a0DQ" target="_blank" class="link-button">
+                <i class="fas fa-receipt" style="margin-right: 8px;"></i> 08/07 &lt;WTF&gt; 예매하기
+            </a>
+        </div>
+
+        <div class="footer">© kw_PEGASUS</div>
+    </div>
+
     <script>
         const mainContainer = document.getElementById("mainContainer");
         const aboutContainer = document.getElementById("aboutContainer");
+        const ticketContainer = document.getElementById("ticketContainer");
         const noticeModal = document.getElementById("noticeModal");
         const contactModal = document.getElementById("contactModal");
 
-        // [팝업 자동 실행 비활성화]
-        // 나중에 다시 띄우고 싶다면 아래 setTimeout 부분을 주석 해제하세요.
         window.addEventListener('load', () => {
             setTimeout(() => { noticeModal.style.display = "block"; }, 500); 
         });
@@ -195,10 +243,28 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function showMain() {
-            aboutContainer.classList.remove('about-slide-in');
+        function showTicketFromNotice() {
+            closeModal('noticeModal');
+            showTicketDirect();
+        }
+
+        function showTicketDirect() {
+            mainContainer.classList.add('main-slide-out');
+            ticketContainer.style.display = "block";
+            setTimeout(() => { ticketContainer.classList.add('ticket-slide-in'); }, 50);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showMain(fromContainerId) {
+            const currentContainer = document.getElementById(fromContainerId);
+            if (fromContainerId === 'aboutContainer') {
+                currentContainer.classList.remove('about-slide-in');
+            } else if (fromContainerId === 'ticketContainer') {
+                currentContainer.classList.remove('ticket-slide-in');
+            }
+
             setTimeout(() => {
-                aboutContainer.style.display = "none";
+                currentContainer.style.display = "none";
                 mainContainer.classList.remove('main-slide-out');
             }, 600); 
             window.scrollTo({ top: 0, behavior: 'smooth' });
