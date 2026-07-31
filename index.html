@@ -117,11 +117,22 @@
         }
 
         /* 소셜 & 티켓 아이콘 스타일 */
-        .social-icons { display: flex; justify-content: center; gap: 30px; margin-bottom: 25px; }
-        .social-icon { text-decoration: none; font-size: 2.2rem !important; color: rgba(255, 255, 255, 0.7); transition: all 0.3s ease; cursor: pointer; }
+        .social-icons { display: flex; justify-content: center; align-items: center; gap: 30px; margin-bottom: 25px; }
+        .social-icon { text-decoration: none; font-size: 2.2rem !important; color: rgba(255, 255, 255, 0.7); transition: all 0.3s ease; cursor: pointer; display: flex; align-items: center; }
         .social-icon.insta:hover { color: #E1306C; transform: translateY(-5px); }
         .social-icon.youtube:hover { color: #FF0000; transform: translateY(-5px); }
-        .social-icon.ticket:hover { color: #FFD700; transform: translateY(-5px); }
+
+        /* 커스텀 티켓 이미지 아이콘 스타일 */
+        .ticket-img-icon {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+            transition: transform 0.3s ease, filter 0.3s ease;
+        }
+        .social-icon.ticket:hover .ticket-img-icon {
+            transform: translateY(-5px) scale(1.1);
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.8));
+        }
 
         .round-button-group { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
         .round-button { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 75px; height: 75px; background-color: #fff; color: #000; border-radius: 50%; text-decoration: none; font-size: 0.75rem; font-weight: 700; transition: all 0.25s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.2); border: none; cursor: pointer; }
@@ -179,7 +190,7 @@
             <img src="posterticket2.jpg" alt="공지 이미지" style="width:100%; border-radius:15px; margin-bottom:20px;">
             <div class="modal-text">
                 <button class="link-button ticket-highlight-btn" onclick="showTicketFromNotice()" style="margin-bottom: 0; width: 100%;">
-                    <i class="fas fa-receipt" style="margin-right: 8px;"></i> PEGASUS 연합공연 예매하기
+                    <i class="fas fa-ticket-alt" style="margin-right: 8px;"></i> PEGASUS 연합공연 예매하기
                 </button>
             </div>
         </div>
@@ -229,6 +240,7 @@
         <h1>PEGASUS</h1>
         <p>광운대학교 중앙록밴드 동아리</p>
 
+        <!-- 커스텀 이미지 아이콘(ticket_icon.png) 적용 -->
         <div class="social-icons">
             <a href="https://instagram.com/kw_pegasus" class="social-icon insta" target="_blank" title="Instagram">
                 <i class="fab fa-instagram"></i>
@@ -237,7 +249,7 @@
                 <i class="fab fa-youtube"></i>
             </a>
             <span class="social-icon ticket" onclick="showTicketDirect()" title="연합공연 예매">
-                <i class="fas fa-receipt"></i>
+                <img src="ticket_icon.png" alt="티켓 예매" class="ticket-img-icon">
             </span>
         </div>
 
@@ -295,7 +307,7 @@
         <div class="footer">© kw_PEGASUS</div>
     </div>
 
-    <!-- [신규: 부원 전용 비공개 재생목록 페이지] -->
+    <!-- [부원 전용 비공개 재생목록 페이지] -->
     <div id="memberContainer" class="container">
         <i class="fas fa-sign-out-alt exit-btn" onclick="showMain('memberContainer')" title="돌아가기"></i>
         <div class="section-title">PEGASUS MEMBER ONLY</div>
@@ -304,7 +316,6 @@
             동아리원 전용 페이지입니다. 비공개 영상들을 쉽게 찾아보실 수 있습니다. 
         </p>
 
-        <!-- 유튜브 일부공개 재생목록 링크들을 여기에 넣어두시면 됩니다 -->
         <div class="section">
             <a href="https://youtube.com/playlist?list=PL3uNA-XitI3H8n3aWI7uJDW2cFuAG-m6y" target="_blank" class="link-button">
                 <i class="fab fa-youtube" style="margin-right: 8px; color: #FF0000;"></i> 일부공개 공연 모음
@@ -363,18 +374,17 @@
 
         /* --- 로그인 및 비밀번호 인증 로직 --- */
         function openLoginModal() {
-            document.getElementById("pwInput").value = ""; // 창 열 때 입력칸 초기화
+            document.getElementById("pwInput").value = "";
             loginModal.style.display = "block";
             setTimeout(() => { document.getElementById("pwInput").focus(); }, 100);
         }
 
         function checkPassword() {
             const inputPw = document.getElementById("pwInput").value;
-            const correctPw = "pegasus1981band"; // 설정하신 비밀번호
+            const correctPw = "pegasus1981band";
 
             if (inputPw === correctPw) {
                 closeModal('loginModal');
-                // 메인 숨기고 부원 전용 섹션 등장
                 mainContainer.classList.add('main-slide-out');
                 memberContainer.style.display = "block";
                 setTimeout(() => { memberContainer.classList.add('member-slide-in'); }, 50);
