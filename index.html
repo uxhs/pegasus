@@ -47,15 +47,15 @@
             background: rgba(40, 40, 40, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); 
             border-radius: 30px; border: 1px solid rgba(255, 255, 255, 0.2); 
             box-shadow: 0 20px 40px rgba(0,0,0,0.4); z-index: 1; 
-            margin: 40px auto;
+            margin: 40px auto; position: relative;
             transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
             opacity: 1; transform: translateX(0);
         }
 
         .main-slide-out { transform: translateX(-150%) !important; opacity: 0 !important; position: absolute !important; pointer-events: none; }
         
-        #aboutContainer, #ticketContainer { position: absolute; top: 0; transform: translateX(150%); opacity: 0; display: none; }
-        .about-slide-in, .ticket-slide-in { display: block !important; opacity: 1 !important; transform: translateX(0) !important; position: relative !important; }
+        #aboutContainer, #ticketContainer, #memberContainer { position: absolute; top: 0; transform: translateX(150%); opacity: 0; display: none; }
+        .about-slide-in, .ticket-slide-in, .member-slide-in { display: block !important; opacity: 1 !important; transform: translateX(0) !important; position: relative !important; }
 
         /* 상단 돌아가기 아이콘 */
         .exit-btn {
@@ -69,6 +69,28 @@
             z-index: 10;
         }
         .exit-btn:hover { color: #fff; transform: translateX(-3px); }
+
+        /* 메인 우측 상단 미니 로그인 버튼 */
+        .login-btn {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 5px 10px;
+            border-radius: 12px;
+            transition: 0.3s;
+            z-index: 10;
+        }
+        .login-btn:hover {
+            color: #fff;
+            border-color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+        }
 
         /* --- UI 요소 스타일 --- */
         .section { margin-bottom: 20px; padding-top: 25px; border-top: 1px solid rgba(255, 255, 255, 0.1); }
@@ -111,10 +133,38 @@
         .about-quote { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 20px 0; font-style: italic; word-break: keep-all; }
         .about-desc { font-size: 0.9rem; color: rgba(255, 255, 255, 0.8); line-height: 1.8; text-align: left; word-break: keep-all; padding: 0 5px; margin-bottom: 30px; }
 
-        /* 모달 및 푸터 */
+        /* 모달 및 비밀번호 입력 스타일 */
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
         .modal-content { position: relative; background-color: rgba(26, 26, 26, 0.95); margin: 15% auto; padding: 25px; border: 1px solid rgba(255,255,255,0.2); width: 80%; max-width: 320px; border-radius: 25px; text-align: center; color: white; animation: fadeInUp 0.5s ease-out; }
         .close-btn { position: absolute; right: 15px; top: 10px; color: #fff; font-size: 32px; font-weight: 900; cursor: pointer; line-height: 1; }
+        
+        /* 로그인 모달 폼 전용 디자인 */
+        .pw-input {
+            width: 85%;
+            padding: 12px;
+            margin: 15px 0 10px 0;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            text-align: center;
+            font-size: 0.95rem;
+            outline: none;
+        }
+        .pw-input:focus { border-color: #fff; }
+        .pw-submit-btn {
+            background: #fff;
+            color: #000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.25s;
+            margin-top: 5px;
+        }
+        .pw-submit-btn:hover { background: #f0f0f0; transform: scale(1.02); }
+
         #contactModal i.fa-phone-alt { font-size: 2.5rem !important; margin-bottom: 15px; color: #fff; }
         .footer { margin-top: 30px; font-size: 0.8rem; color: rgba(255, 255, 255, 0.3); }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -122,10 +172,11 @@
 </head>
 <body>
 
+    <!-- [공지 모달] -->
     <div id="noticeModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('noticeModal')">&times;</span>
-            <img src="posterticket2.jpg" alt="공지 이미지" style="width:100%; border-radius:15px; margin-bottom:20px;">
+            <img src="posterticket.jpg" alt="공지 이미지" style="width:100%; border-radius:15px; margin-bottom:20px;">
             <div class="modal-text">
                 <button class="link-button ticket-highlight-btn" onclick="showTicketFromNotice()" style="margin-bottom: 0; width: 100%;">
                     <i class="fas fa-receipt" style="margin-right: 8px;"></i> PEGASUS 연합공연 예매하기
@@ -134,6 +185,22 @@
         </div>
     </div>
 
+    <!-- [로그인 모달 (비밀번호 입력)] -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('loginModal')">&times;</span>
+            <div class="modal-text">
+                <i class="fas fa-lock" style="font-size: 2rem; margin-bottom: 10px; color: #fff;"></i>
+                <h3>MEMBER LOGIN</h3>
+                <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7);">동아리원 전용 비밀번호를 입력하세요.</p>
+                <input type="password" id="pwInput" class="pw-input" placeholder="Password" onkeyup="if(window.event.keyCode==13){checkPassword()}">
+                <br>
+                <button class="pw-submit-btn" onclick="checkPassword()">인증하기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- [연락처 모달] -->
     <div id="contactModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('contactModal')">&times;</span>
@@ -155,6 +222,9 @@
 
     <!-- [메인 페이지] -->
     <div id="mainContainer" class="container">
+        <!-- 우측 상단 미니 로그인 버튼 -->
+        <div class="login-btn" onclick="openLoginModal()"><i class="fas fa-key" style="margin-right: 4px;"></i>LOGIN</div>
+
         <img src="pega_logo.png" alt="Profile" class="profile-img" onclick="showAbout()">
         <h1>PEGASUS</h1>
         <p>광운대학교 중앙록밴드 동아리</p>
@@ -225,11 +295,47 @@
         <div class="footer">© kw_PEGASUS</div>
     </div>
 
+    <!-- [신규: 부원 전용 비공개 재생목록 페이지] -->
+    <div id="memberContainer" class="container">
+        <i class="fas fa-sign-out-alt exit-btn" onclick="showMain('memberContainer')" title="돌아가기"></i>
+        <div class="section-title">PEGASUS MEMBER ONLY</div>
+        
+        <p style="margin-top: 10px; margin-bottom: 25px; color: rgba(255,255,255,0.85); font-size: 0.95rem;">
+            동아리원 전용 로그인 페이지입니다.
+        </p>
+
+        <!-- 유튜브 일부공개 재생목록 링크들을 여기에 넣어두시면 됩니다 -->
+        <div class="section">
+            <a href="https://youtube.com/playlist?list=PL3uNA-XitI3H8n3aWI7uJDW2cFuAG-m6y" target="_blank" class="link-button">
+                <i class="fab fa-youtube" style="margin-right: 8px; color: #FF0000;"></i> 일부공개 공연 모음
+            </a>
+            <a href="https://youtube.com/playlist?list=PL3uNA-XitI3GWCmcchQ7GRlgYAj3TSPkn" target="_blank" class="link-button">
+                <i class="fab fa-youtube" style="margin-right: 8px; color: #FF0000;"></i> 2025 정기연주회 (비공개)
+            </a>
+            <a href="https://youtube.com/playlist?list=PL3uNA-XitI3GavGf39uDEUDPd03WtIwwX" target="_blank" class="link-button">
+                <i class="fab fa-youtube" style="margin-right: 8px; color: #FF0000;"></i> 2024 정기연주회 (비공개)
+            </a>
+            <a href="https://youtube.com/playlist?list=PL3uNA-XitI3Enz1TlfTUZLDs0eRhU-F6K" target="_blank" class="link-button">
+                <i class="fab fa-youtube" style="margin-right: 8px; color: #FF0000;"></i> 2023 정기연주회 (비공개)
+            </a>
+            <a href="https://youtube.com/playlist?list=PL3uNA-XitI3FSe_ZqJDSnaU4a0HdJltOY" target="_blank" class="link-button">
+                <i class="fab fa-youtube" style="margin-right: 8px; color: #FF0000;"></i> 2022 정기연주회 (비공개)
+            </a>
+            <a href="https://youtube.com/playlist?list=PL3uNA-XitI3GeAF_qqz6GbFqGNcO5q_pw" target="_blank" class="link-button">
+                <i class="fab fa-youtube" style="margin-right: 8px; color: #FF0000;"></i> 2021 정기연주회 (비공개)
+            </a>
+        </div>
+
+        <div class="footer">© kw_PEGASUS</div>
+    </div>
+
     <script>
         const mainContainer = document.getElementById("mainContainer");
         const aboutContainer = document.getElementById("aboutContainer");
         const ticketContainer = document.getElementById("ticketContainer");
+        const memberContainer = document.getElementById("memberContainer");
         const noticeModal = document.getElementById("noticeModal");
+        const loginModal = document.getElementById("loginModal");
         const contactModal = document.getElementById("contactModal");
 
         window.addEventListener('load', () => {
@@ -255,12 +361,39 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        /* --- 로그인 및 비밀번호 인증 로직 --- */
+        function openLoginModal() {
+            document.getElementById("pwInput").value = ""; // 창 열 때 입력칸 초기화
+            loginModal.style.display = "block";
+            setTimeout(() => { document.getElementById("pwInput").focus(); }, 100);
+        }
+
+        function checkPassword() {
+            const inputPw = document.getElementById("pwInput").value;
+            const correctPw = "pegasus1981band"; // 설정하신 비밀번호
+
+            if (inputPw === correctPw) {
+                closeModal('loginModal');
+                // 메인 숨기고 부원 전용 섹션 등장
+                mainContainer.classList.add('main-slide-out');
+                memberContainer.style.display = "block";
+                setTimeout(() => { memberContainer.classList.add('member-slide-in'); }, 50);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                alert("비밀번호가 틀렸습니다.");
+                document.getElementById("pwInput").value = "";
+                document.getElementById("pwInput").focus();
+            }
+        }
+
         function showMain(fromContainerId) {
             const currentContainer = document.getElementById(fromContainerId);
             if (fromContainerId === 'aboutContainer') {
                 currentContainer.classList.remove('about-slide-in');
             } else if (fromContainerId === 'ticketContainer') {
                 currentContainer.classList.remove('ticket-slide-in');
+            } else if (fromContainerId === 'memberContainer') {
+                currentContainer.classList.remove('member-slide-in');
             }
 
             setTimeout(() => {
@@ -275,6 +408,7 @@
 
         window.onclick = function(event) {
             if (event.target == noticeModal) closeModal('noticeModal');
+            if (event.target == loginModal) closeModal('loginModal');
             if (event.target == contactModal) closeModal('contactModal');
         }
     </script>
