@@ -129,11 +129,11 @@
             display: inline-block;
         }
 
-        /* # 위치와 꼬리가 수정된 펄스 말풍선 */
+        /* 위치와 꼬리가 수정된 펄스 말풍선 */
         .ticket-badge {
             position: absolute;
             bottom: 55%;
-            left: 40px; /* 우측으로 더 이동하여 텍스트와 분리 */
+            left: 40px;
             background: #FFD700;
             color: #000;
             font-size: 0.7rem;
@@ -224,11 +224,10 @@
 </head>
 <body>
 
-    <!-- [공지 모달] -->
     <div id="noticeModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('noticeModal')">&times;</span>
-            <img src="posterticket5.png" alt="공지 이미지" style="width:100%; border-radius:15px; margin-bottom:20px;">
+            <img src="content1.jpg" alt="공지 이미지" style="width:100%; border-radius:15px; margin-bottom:20px;">
             <div class="modal-text">
                 <button class="link-button ticket-highlight-btn" onclick="showTicketFromNotice()" style="margin-bottom: 0; width: 100%;">
                     <i class="fas fa-receipt" style="margin-right: 8px;"></i> PEGASUS 연합공연 예매하기
@@ -237,7 +236,6 @@
         </div>
     </div>
 
-    <!-- [로그인 모달 (비밀번호 입력)] -->
     <div id="loginModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('loginModal')">&times;</span>
@@ -252,7 +250,6 @@
         </div>
     </div>
 
-    <!-- [연락처 모달] -->
     <div id="contactModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeModal('contactModal')">&times;</span>
@@ -272,16 +269,13 @@
         <div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div>
     </div>
 
-    <!-- [메인 페이지] -->
     <div id="mainContainer" class="container">
-        <!-- 우측 상단 미니 로그인 버튼 -->
         <div class="login-btn" onclick="openLoginModal()"><i class="fas fa-key" style="margin-right: 4px;"></i>LOGIN</div>
 
         <img src="pega_logo.png" alt="Profile" class="profile-img" onclick="showAbout()">
         <h1>PEGASUS</h1>
         <p>광운대학교 중앙록밴드 동아리</p>
 
-        <!-- 소셜 & 티켓 예매 아이콘 -->
         <div class="social-icons">
             <a href="https://instagram.com/kw_pegasus" class="social-icon insta" target="_blank" title="Instagram">
                 <i class="fab fa-instagram"></i>
@@ -291,9 +285,6 @@
             </a>
             
             <div class="ticket-icon-wrapper">
-                <div class="ticket-badge" onclick="showTicketDirect()">
-                    8월 연합공연<br>예매 진행 중!!
-                </div>
                 <span class="social-icon ticket" onclick="showTicketDirect()" title="연합공연 예매">
                     <i class="fas fa-receipt"></i>
                 </span>
@@ -310,7 +301,6 @@
         <div class="footer">© kw_PEGASUS</div>
     </div>
 
-    <!-- [소개 페이지] -->
     <div id="aboutContainer" class="container">
         <i class="fas fa-sign-out-alt exit-btn" onclick="showMain('aboutContainer')" title="돌아가기"></i>
         <div class="section-title">About PEGASUS</div>
@@ -333,13 +323,12 @@
         <div class="footer">© kw_PEGASUS</div>
     </div>
 
-    <!-- [연합공연 예매 전용 페이지] -->
     <div id="ticketContainer" class="container">
         <i class="fas fa-sign-out-alt exit-btn" onclick="showMain('ticketContainer')" title="돌아가기"></i>
         <div class="section-title">PEGASUS 티켓 예매</div>
         
         <p style="margin-top: 10px; margin-bottom: 25px; color: rgba(255,255,255,0.85); font-size: 0.95rem;">
-            원하시는 연합공연 예매 링크를 선택해 주세요.
+            다음 공연을 기대해주세요!
         </p>
 
         <div class="section">
@@ -351,7 +340,6 @@
         <div class="footer">© kw_PEGASUS</div>
     </div>
 
-    <!-- [신규: 부원 전용 비공개 재생목록 페이지] -->
     <div id="memberContainer" class="container">
         <i class="fas fa-sign-out-alt exit-btn" onclick="showMain('memberContainer')" title="돌아가기"></i>
         <div class="section-title">PEGASUS MEMBER ONLY</div>
