@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-C6632RQ0KD"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-C6632RQ0KD');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PEGASUS Links</title>
@@ -127,53 +137,6 @@
         .ticket-icon-wrapper {
             position: relative;
             display: inline-block;
-        }
-
-        /* 위치와 꼬리가 수정된 펄스 말풍선 */
-        .ticket-badge {
-            position: absolute;
-            bottom: 55%;
-            left: 40px;
-            background: #FFD700;
-            color: #000;
-            font-size: 0.7rem;
-            font-weight: 800;
-            line-height: 1.35;
-            padding: 7px 12px;
-            border-radius: 16px;
-            white-space: nowrap;
-            cursor: pointer;
-            box-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
-            animation: pulse 1.8s infinite;
-            z-index: 5;
-            text-align: center;
-        }
-
-        /* 말풍선 대각선 길어진 꼬리 */
-        .ticket-badge::after {
-            content: '';
-            position: absolute;
-            top: 85%;
-            left: 1px;
-            border-width: 16px 10px 0 3px;
-            border-style: solid;
-            border-color: #FFD700 transparent transparent transparent;
-            transform: rotate(45deg);
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7);
-            }
-            50% {
-                transform: scale(1.05);
-                box-shadow: 0 0 0 8px rgba(255, 215, 0, 0);
-            }
-            100% {
-                transform: scale(1);
-                box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
-            }
         }
 
         .round-button-group { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
@@ -323,21 +286,19 @@
         <div class="footer">© kw_PEGASUS</div>
     </div>
 
+    <!-- [연합공연 예매 전용 페이지: 구글 시트 데이터 기반 자동 렌더링] -->
     <div id="ticketContainer" class="container">
         <i class="fas fa-sign-out-alt exit-btn" onclick="showMain('ticketContainer')" title="돌아가기"></i>
         <div class="section-title">PEGASUS 티켓 예매</div>
         
-        <p style="margin-top: 10px; margin-bottom: 25px; color: rgba(255,255,255,0.85); font-size: 0.95rem;">
-            다음 공연을 기대해주세요!
+        <p id="ticketNoticeText" style="margin-top: 10px; margin-bottom: 25px; color: rgba(255,255,255,0.85); font-size: 0.95rem;">
+            원하시는 연합공연 예매 링크를 선택해 주세요.
         </p>
         
-        <!--
-        <div class="section">
-            <a href="https://forms.gle/8ndimR1ksZQKk1bY6" target="_blank" class="link-button">
-                <i class="fas fa-receipt" style="margin-right: 8px;"></i> 08/29 &lt;RUSH&gt; 예매하기
-            </a>
+        <!-- 구글 시트에서 가져온 버튼이 여기에 동적으로 추가됩니다 -->
+        <div class="section" id="ticketList">
+            <p style="color: rgba(255,255,255,0.5); font-size: 0.85rem;">예매 정보를 불러오는 중입니다...</p>
         </div>
-        -->
 
         <div class="footer">© kw_PEGASUS</div>
     </div>
@@ -383,8 +344,60 @@
         const loginModal = document.getElementById("loginModal");
         const contactModal = document.getElementById("contactModal");
 
+        /* --- 구글 스프레드시트 예매 자동 연동 설정 (Apps Script 웹 앱 URL 방식) --- */
+        const API_URL = 'https://script.google.com/macros/s/AKfycbwaTLwXS1O5Kbkwos-MPZlMRQ3JqRdZmJYqM7r_pJvGKW_Cj4hIvqsx0eYjYgQs2R1t/exec';
+
+        async function loadTicketsFromSheet() {
+            const ticketList = document.getElementById("ticketList");
+            const noticeText = document.getElementById("ticketNoticeText");
+
+            try {
+                const response = await fetch(API_URL);
+                if (!response.ok) {
+                    throw new Error(`HTTP 상태 코드 오류: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (!data || data.length === 0) {
+                    ticketList.innerHTML = '';
+                    noticeText.innerText = "현재 진행 중인 연합공연 예매가 없습니다.\n다음 공연을 기대해주세요!";
+                    return;
+                }
+
+                let activeButtons = '';
+
+                data.forEach(item => {
+                    const title = item.title || '';
+                    const url = item.url || '';
+                    const active = String(item.active).toUpperCase();
+
+                    // 체크박스 TRUE 또는 Y 체크
+                    if ((active === 'TRUE' || active === 'Y' || active === '1') && url.startsWith('http')) {
+                        activeButtons += `
+                            <a href="${url}" target="_blank" class="link-button">
+                                <i class="fas fa-receipt" style="margin-right: 8px;"></i> ${title}
+                            </a>
+                        `;
+                    }
+                });
+
+                if (activeButtons.trim() !== '') {
+                    ticketList.innerHTML = activeButtons;
+                    noticeText.innerText = "원하시는 연합공연 예매 링크를 선택해 주세요.";
+                } else {
+                    ticketList.innerHTML = '';
+                    noticeText.innerText = "현재 진행 중인 연합공연 예매가 없습니다.\n다음 공연을 기대해주세요!";
+                }
+            } catch (error) {
+                console.error("티켓 목록 로드 오류:", error);
+                ticketList.innerHTML = '<p style="color: rgba(255,255,255,0.5); font-size: 0.85rem;">예매 정보를 불러오지 못했습니다.</p>';
+            }
+        }
+
         window.addEventListener('load', () => {
             setTimeout(() => { noticeModal.style.display = "block"; }, 500); 
+            loadTicketsFromSheet(); // 페이지 로드 시 구글 시트 데이터 불러오기
         });
 
         function showAbout() {
