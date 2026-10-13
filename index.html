@@ -14,16 +14,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PEGASUS Links</title>
+    
+    <!-- 폰트 로드: Pretendard(한글) & Montserrat(영문 타이포) -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,700;0,800;0,900;1,800&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
     <style>
-        /* 기본 레이아웃 */
+        /* 기본 레이아웃 및 한글 폰트 설정 */
         body {
             margin: 0; padding: 0;
-            font-family: 'Pretendard', -apple-system, sans-serif;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            letter-spacing: -0.025em;
             background: linear-gradient(135deg, #000000 0%, #000000 63%, #ffffff 100%);
             background-attachment: fixed;
             display: flex; flex-direction: column; align-items: center;
             min-height: 100vh; overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* --- 별빛 파티클 배경 --- */
@@ -85,10 +95,11 @@
             position: absolute;
             top: 25px;
             right: 25px;
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.65);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
             cursor: pointer;
             border: 1px solid rgba(255, 255, 255, 0.3);
             padding: 5px 10px;
@@ -104,13 +115,38 @@
 
         /* --- UI 요소 스타일 --- */
         .section { margin-bottom: 20px; padding-top: 25px; border-top: 1px solid rgba(255, 255, 255, 0.1); }
-        .section-title { font-size: 0.9rem; font-weight: 800; color: rgba(255, 255, 255, 0.8); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px; }
+        .section-title { 
+            font-family: 'Montserrat', 'Pretendard', sans-serif;
+            font-size: 0.88rem; 
+            font-weight: 800; 
+            color: rgba(255, 255, 255, 0.85); 
+            text-transform: uppercase; 
+            letter-spacing: 2.2px; 
+            margin-bottom: 15px; 
+        }
         .profile-img { width: 130px; height: 130px; border-radius: 50%; margin-bottom: 15px; border: 2px solid rgba(255, 255, 255, 0.3); object-fit: cover; box-shadow: 0 10px 25px rgba(255, 255, 255, 0.15); cursor: pointer; transition: 0.3s; }
         .profile-img:hover { transform: scale(1.05); }
-        h1 { font-size: 1.5rem; margin-bottom: 8px; color: #fff; letter-spacing: 2px; }
-        p { font-size: 0.95rem; color: rgba(255, 255, 255, 0.7); margin-bottom: 25px; }
+        
+        /* 락 무드 메인 타이포 */
+        h1 { 
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.75rem; 
+            font-weight: 900; 
+            margin-bottom: 8px; 
+            color: #fff; 
+            letter-spacing: 3.5px; 
+            text-transform: uppercase;
+        }
+        
+        p { font-size: 0.95rem; color: rgba(255, 255, 255, 0.75); margin-bottom: 25px; line-height: 1.5; }
 
-        .link-button { display: flex; align-items: center; justify-content: center; background-color: #ffffff; color: #000; text-decoration: none; margin-bottom: 12px; padding: 14px; border-radius: 15px; font-weight: 700; font-size: 0.95rem; transition: 0.25s; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .link-button { 
+            display: flex; align-items: center; justify-content: center; 
+            background-color: #ffffff; color: #000; text-decoration: none; 
+            margin-bottom: 12px; padding: 14px; border-radius: 15px; 
+            font-weight: 700; font-size: 0.95rem; letter-spacing: -0.01em;
+            transition: 0.25s; box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
+        }
         .link-button:hover { transform: scale(1.02); background-color: #f0f0f0; }
 
         .ticket-highlight-btn {
@@ -140,14 +176,23 @@
         }
 
         .round-button-group { display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
-        .round-button { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 75px; height: 75px; background-color: #fff; color: #000; border-radius: 50%; text-decoration: none; font-size: 0.75rem; font-weight: 700; transition: all 0.25s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.2); border: none; cursor: pointer; }
+        .round-button { 
+            display: flex; flex-direction: column; align-items: center; justify-content: center; 
+            width: 75px; height: 75px; background-color: #fff; color: #000; border-radius: 50%; 
+            text-decoration: none; font-size: 0.75rem; font-weight: 700; 
+            transition: all 0.25s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.2); 
+            border: none; cursor: pointer; font-family: 'Montserrat', 'Pretendard', sans-serif;
+        }
         .round-button i { font-size: 1.5rem !important; margin-bottom: 4px; }
         .round-button:hover { background-color: #000; color: #fff; transform: translateY(-5px); }
 
         /* About 페이지 상세 */
         .about-main-img { width: 100%; border-radius: 15px; margin-bottom: 10px; }
-        .about-quote { font-size: 1.4rem; font-weight: 800; color: #fff; margin: 20px 0; font-style: italic; word-break: keep-all; }
-        .about-desc { font-size: 0.9rem; color: rgba(255, 255, 255, 0.8); line-height: 1.8; text-align: left; word-break: keep-all; padding: 0 5px; margin-bottom: 30px; }
+        .about-quote { 
+            font-size: 1.35rem; font-weight: 800; color: #fff; margin: 20px 0; 
+            font-style: italic; word-break: keep-all; letter-spacing: -0.03em;
+        }
+        .about-desc { font-size: 0.92rem; color: rgba(255, 255, 255, 0.8); line-height: 1.8; text-align: left; word-break: keep-all; padding: 0 5px; margin-bottom: 30px; }
 
         /* 모달 및 비밀번호 입력 스타일 */
         .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
@@ -165,6 +210,7 @@
             text-align: center;
             font-size: 0.95rem;
             outline: none;
+            font-family: inherit;
         }
         .pw-input:focus { border-color: #fff; }
         .pw-submit-btn {
@@ -177,11 +223,15 @@
             cursor: pointer;
             transition: 0.25s;
             margin-top: 5px;
+            font-family: inherit;
         }
         .pw-submit-btn:hover { background: #f0f0f0; transform: scale(1.02); }
 
         #contactModal i.fa-phone-alt { font-size: 2.5rem !important; margin-bottom: 15px; color: #fff; }
-        .footer { margin-top: 30px; font-size: 0.8rem; color: rgba(255, 255, 255, 0.3); }
+        .footer { 
+            margin-top: 30px; font-size: 0.78rem; color: rgba(255, 255, 255, 0.3); 
+            font-family: 'Montserrat', sans-serif; letter-spacing: 1px;
+        }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
@@ -204,7 +254,7 @@
             <span class="close-btn" onclick="closeModal('loginModal')">&times;</span>
             <div class="modal-text">
                 <i class="fas fa-lock" style="font-size: 2rem; margin-bottom: 10px; color: #fff;"></i>
-                <h3>MEMBER LOGIN</h3>
+                <h3 style="font-family: 'Montserrat', sans-serif; letter-spacing: 2px;">MEMBER LOGIN</h3>
                 <p style="font-size: 0.85rem; color: rgba(255,255,255,0.7);">동아리원 전용 비밀번호를 입력하세요.</p>
                 <input type="password" id="pwInput" class="pw-input" placeholder="Password" onkeyup="if(window.event.keyCode==13){checkPassword()}">
                 <br>
@@ -218,7 +268,7 @@
             <span class="close-btn" onclick="closeModal('contactModal')">&times;</span>
             <div class="modal-text">
                 <i class="fas fa-phone-alt"></i>
-                <h3>Contact Us</h3>
+                <h3 style="font-family: 'Montserrat', sans-serif; letter-spacing: 2px;">CONTACT US</h3>
                 <p style="font-size: 1.3rem; color: #fff; font-weight: 800; margin: 15px 0;">010-5773-3963 (기장 최원영)</p>
                 <p>공연 문의 및 동아리 관련 궁금한 점은<br>위 번호로 연락주세요!</p>
             </div>
@@ -233,7 +283,7 @@
     </div>
 
     <div id="mainContainer" class="container">
-        <div class="login-btn" onclick="openLoginModal()"><i class="fas fa-key" style="margin-right: 4px;"></i>LOGIN</div>
+        <div class="login-btn" onclick="openLoginModal()"><i class="fas fa-key" style="margin-right: 5px;"></i>LOGIN</div>
 
         <img src="pega_logo.png" alt="Profile" class="profile-img" onclick="showAbout()">
         <h1>PEGASUS</h1>
@@ -266,7 +316,7 @@
 
     <div id="aboutContainer" class="container">
         <i class="fas fa-sign-out-alt exit-btn" onclick="showMain('aboutContainer')" title="돌아가기"></i>
-        <div class="section-title">About PEGASUS</div>
+        <div class="section-title">ABOUT PEGASUS</div>
         <img src="about_main2.jpg" alt="Pegasus Group" class="about-main-img">
         <div class="about-quote">"당신의 심장에 Rock Spirit을!"</div>
         <div class="about-desc">
@@ -280,7 +330,7 @@
 
         <div class="section" style="margin-top: 40px;">
             <div class="round-button-group">
-                <div class="round-button" onclick="showContact()"><i class="fas fa-phone"></i><span>Contact</span></div>
+                <div class="round-button" onclick="showContact()"><i class="fas fa-phone"></i><span>CONTACT</span></div>
             </div>
         </div>
         <div class="footer">© kw_PEGASUS</div>
