@@ -260,7 +260,7 @@
             <img src="content2.jpg" alt="공지 이미지" style="width:100%; border-radius:15px; margin-bottom:20px;">
             <div class="modal-text">
                 <a href="https://forms.gle/6c7QueB6vsrGa9Bz9" target="_blank" class="link-button ticket-highlight-btn" style="margin-bottom: 0; width: 100%; box-sizing: border-box; text-decoration: none;">
-                    <i class="link-button" style="margin-right: 8px; color: #FF0000;"></i> ▶ 지금 바로 지원하기 ◀
+                    ▶ 지금 바로 지원하기 ◀
                 </a>
             </div>
         </div>
@@ -314,14 +314,17 @@
                 <i class="fab fa-youtube"></i>
             </a>
             
-            <!-- PNG 파일(ticket_icon3.png)로 대체된 티켓 아이콘 -->
             <div class="ticket-icon-wrapper">
                 <img src="ticket_icon8.png" alt="연합공연 예매" class="ticket-img-icon" onclick="showTicketDirect()" title="연합공연 예매">
             </div>
         </div>
+
+        <!-- 46기 베이스 지원 섹션 (닫는 태그 포함 정상화) -->
         <div class="section">
             <div class="section-title">PEGASUS 46기 베이스 지원</div>
-            <a href="https://forms.gle/6c7QueB6vsrGa9Bz9" class="link-button" target="_blank"><i class="fas fa-play-circle" style="margin-right: 8px;"></i> 지금 바로 지원하기!!</a>
+            <a href="https://forms.gle/6c7QueB6vsrGa9Bz9" class="link-button" target="_blank">지금 바로 지원하기!!</a>
+        </div>
+
         <div class="section">
             <div class="section-title">PEGASUS 둘러보기</div>
             <a href="https://youtube.com/playlist?list=PLCRvQdsVEX5o&si=Weun58wQqqZen1ti" class="link-button" target="_blank"><i class="fas fa-play-circle" style="margin-right: 8px;"></i> 2026 창립제</a>
@@ -363,7 +366,6 @@
             원하시는 연합공연 예매 링크를 선택해 주세요.
         </p>
         
-        <!-- 구글 시트에서 가져온 버튼이 여기에 동적으로 추가됩니다 -->
         <div class="section" id="ticketList">
             <p style="color: rgba(255,255,255,0.5); font-size: 0.85rem;">예매 정보를 불러오는 중입니다...</p>
         </div>
@@ -465,7 +467,7 @@
 
         window.addEventListener('load', () => {
             setTimeout(() => { noticeModal.style.display = "block"; }, 500); 
-            loadTicketsFromSheet(); // 페이지 로드 시 구글 시트 데이터 불러오기
+            loadTicketsFromSheet();
         });
 
         function showAbout() {
